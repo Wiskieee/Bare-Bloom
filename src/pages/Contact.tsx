@@ -35,7 +35,7 @@ export default function Contact() {
               </div>
               <div>
                 <h4 className="text-[10px] uppercase tracking-widest font-bold mb-1">Call Us</h4>
-                <p className="text-brand-ink/60">+1 (888) 456-7890</p>
+                <p className="text-brand-ink/60">+63 (834) 456-7890</p>
                 <p className="text-[10px] text-brand-ink/40 mt-2 italic">Mon — Fri, 9am — 6pm EST</p>
               </div>
             </div>
