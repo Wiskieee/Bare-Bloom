@@ -1,12 +1,12 @@
 import brush1 from "./assets/images/brush1.jpg";
-import eyelashCurler from "./assets/images/eyelash curler.jpg";
-import falseLashes1 from "./assets/images/false lashes1.jpg";
+import eyelashCurler from "./assets/images/eyelash-curler.jpg";
+import falseLashes1 from "./assets/images/false-lashes1.jpg";
 import foundation1 from "./assets/images/foundation1.jpg";
 import makeup1 from "./assets/images/makeup1.jpg";
 import makeup2 from "./assets/images/makeup2.jpg";
 import makeup3 from "./assets/images/makeup3.jpg";
-import matteLipstick1 from "./assets/images/matte lipstick1.jpg";
-import matteLipstick2 from "./assets/images/matte lipstick2.jpg";
+import matteLipstick1 from "./assets/images/matte-lipstick1.jpg";
+import matteLipstick2 from "./assets/images/matte-lipstick2.jpg";
 import skincare1 from "./assets/images/skincare1.jpg";
 import skincare2 from "./assets/images/skincare2.jpg";
 import skincare3 from "./assets/images/skincare3.jpg";
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
     description: "A high-shine, non-sticky lip oil that hydrates and enhances your natural lip color.",
     shades: ["Rose", "Honey", "Clear", "Berry"],
     features: ["Vegan", "Hydrating", "High Shine"],
-    isBestSeller: true
+    isBestSeller: true,
   },
   {
     id: "skin-tint",
@@ -54,7 +54,7 @@ export const PRODUCTS: Product[] = [
     description: "A breathable, lightweight formula that evens out skin tone while providing a radiant finish.",
     shades: ["Light 1", "Light 2", "Medium 1", "Medium 2", "Tan", "Deep"],
     features: ["Clean", "Breathable", "SPF 20"],
-    isNew: true
+    isNew: true,
   },
   {
     id: "cloud-blush",
@@ -67,7 +67,7 @@ export const PRODUCTS: Product[] = [
     hoverImage: makeup2,
     description: "Multi-use cream blush that melts into your skin for a soft, watercolor-like flush.",
     shades: ["Soft Pink", "Peach", "Mauve", "Coral"],
-    features: ["Buildable", "Creamy", "Long-lasting"]
+    features: ["Buildable", "Creamy", "Long-lasting"],
   },
   {
     id: "silk-highlighter",
@@ -80,8 +80,8 @@ export const PRODUCTS: Product[] = [
     hoverImage: brush1,
     description: "An ethereal liquid highlighter that glows from within. No glitter, just silk.",
     shades: ["Gold", "Champagne", "Bronze"],
-    features: ["Radiant", "Weightless", "Multidimensional"]
-  }
+    features: ["Radiant", "Weightless", "Multidimensional"],
+  },
 ];
 
 export const CATEGORIES = [
@@ -94,5 +94,5 @@ export const CATEGORIES = [
   { name: "Eyelash Tools", image: eyelashCurler },
   { name: "False Lashes", image: falseLashes1 },
   { name: "Makeup", image: makeup2 },
-  { name: "Skincare Set", image: skincare3 }
+  { name: "Skincare Set", image: skincare3 },
 ];
