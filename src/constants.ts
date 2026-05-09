@@ -1,3 +1,16 @@
+import brush1 from "./assets/images/brush1.jpg";
+import eyelashCurler from "./assets/images/eyelash curler.jpg";
+import falseLashes1 from "./assets/images/false lashes1.jpg";
+import foundation1 from "./assets/images/foundation1.jpg";
+import makeup1 from "./assets/images/makeup1.jpg";
+import makeup2 from "./assets/images/makeup2.jpg";
+import makeup3 from "./assets/images/makeup3.jpg";
+import matteLipstick1 from "./assets/images/matte lipstick1.jpg";
+import matteLipstick2 from "./assets/images/matte lipstick2.jpg";
+import skincare1 from "./assets/images/skincare1.jpg";
+import skincare2 from "./assets/images/skincare2.jpg";
+import skincare3 from "./assets/images/skincare3.jpg";
+
 export interface Product {
   id: string;
   name: string;
@@ -22,8 +35,8 @@ export const PRODUCTS: Product[] = [
     price: 24,
     rating: 4.9,
     reviews: 128,
-    image: "https://images.unsplash.com/photo-1586776193466-85df5c0d13b2?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1591360236480-4ed861025fa1?auto=format&fit=crop&q=80&w=800",
+    image: matteLipstick1,
+    hoverImage: matteLipstick2,
     description: "A high-shine, non-sticky lip oil that hydrates and enhances your natural lip color.",
     shades: ["Rose", "Honey", "Clear", "Berry"],
     features: ["Vegan", "Hydrating", "High Shine"],
@@ -36,8 +49,8 @@ export const PRODUCTS: Product[] = [
     price: 38,
     rating: 4.8,
     reviews: 240,
-    image: "https://images.unsplash.com/photo-1593001389771-5f212727a29e?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1620917670397-dc71bce6d01d?auto=format&fit=crop&q=80&w=800",
+    image: foundation1,
+    hoverImage: skincare1,
     description: "A breathable, lightweight formula that evens out skin tone while providing a radiant finish.",
     shades: ["Light 1", "Light 2", "Medium 1", "Medium 2", "Tan", "Deep"],
     features: ["Clean", "Breathable", "SPF 20"],
@@ -50,8 +63,8 @@ export const PRODUCTS: Product[] = [
     price: 22,
     rating: 4.7,
     reviews: 89,
-    image: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1557209653-1560c5717bc3?auto=format&fit=crop&q=80&w=800",
+    image: makeup1,
+    hoverImage: makeup2,
     description: "Multi-use cream blush that melts into your skin for a soft, watercolor-like flush.",
     shades: ["Soft Pink", "Peach", "Mauve", "Coral"],
     features: ["Buildable", "Creamy", "Long-lasting"]
@@ -63,8 +76,8 @@ export const PRODUCTS: Product[] = [
     price: 30,
     rating: 4.9,
     reviews: 156,
-    image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&q=80&w=800",
-    hoverImage: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&q=80&w=800",
+    image: makeup3,
+    hoverImage: brush1,
     description: "An ethereal liquid highlighter that glows from within. No glitter, just silk.",
     shades: ["Gold", "Champagne", "Bronze"],
     features: ["Radiant", "Weightless", "Multidimensional"]
@@ -72,10 +85,14 @@ export const PRODUCTS: Product[] = [
 ];
 
 export const CATEGORIES = [
-  { name: "Lip Collection", image: "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&q=80&w=800" },
-  { name: "Skin Tint", image: "https://images.unsplash.com/photo-1610631882914-724d2629087c?auto=format&fit=crop&q=80&w=800" },
-  { name: "Blush", image: "https://images.unsplash.com/photo-1515688594390-b649af70d282?auto=format&fit=crop&q=80&w=800" },
-  { name: "Highlighter", image: "https://images.unsplash.com/photo-1557170343-73ba04ca656f?auto=format&fit=crop&q=80&w=800" },
-  { name: "Brushes", image: "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?auto=format&fit=crop&q=80&w=800" },
-  { name: "Skincare", image: "https://images.unsplash.com/photo-1601049541289-9b1b7abcfe19?auto=format&fit=crop&q=80&w=800" }
+  { name: "Lip Collection", image: matteLipstick1 },
+  { name: "Skin Tint", image: foundation1 },
+  { name: "Blush", image: makeup1 },
+  { name: "Highlighter", image: makeup3 },
+  { name: "Brushes", image: brush1 },
+  { name: "Skincare", image: skincare2 },
+  { name: "Eyelash Tools", image: eyelashCurler },
+  { name: "False Lashes", image: falseLashes1 },
+  { name: "Makeup", image: makeup2 },
+  { name: "Skincare Set", image: skincare3 }
 ];
