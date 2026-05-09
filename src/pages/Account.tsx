@@ -33,7 +33,7 @@ export default function Account() {
               A
             </div>
             <div>
-              <p className="text-lg font-serif">Ariana Bloom</p>
+              <p className="text-lg font-serif">Pauleen Lumaban</p>
               <p className="text-[10px] uppercase tracking-widest text-brand-ink/40">Member since 2024</p>
             </div>
           </div>
