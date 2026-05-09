@@ -151,11 +151,31 @@ export default function ProductDetail() {
               </div>
               
               <button 
-                onClick={handleAddToCart}
-                className={cn(
-                  BUTTON_STYLES.primary,
-                  "flex-1 rounded-full",
-                  isAdded && "bg-green-600 hover:bg-green-700"
+               const handleAddToCart = () => {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+  const existingProduct = cart.find(
+    (item: any) => item.id === product.id
+  );
+
+  if (existingProduct) {
+    existingProduct.quantity += quantity;
+  } else {
+    cart.push({
+      ...product,
+      quantity,
+      selectedShade,
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  setIsAdded(true);
+
+  setTimeout(() => {
+    setIsAdded(false);
+  }, 2000);
+};
                 )}
               >
                 <AnimatePresence mode="wait">
