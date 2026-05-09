@@ -19,35 +19,35 @@ export default function ProductDetail() {
   const [activeTab, setActiveTab] = useState('description');
   const [isAdded, setIsAdded] = useState(false);
 
-const handleAddToCart = () => {
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  const existingProduct = cart.find(
-    (item: any) => item.id === product.id
-  );
+    const existingProduct = cart.find(
+      (item: any) => item.id === product.id && item.selectedShade === selectedShade
+    );
 
-  if (existingProduct) {
-    existingProduct.quantity += quantity;
-  } else {
-    cart.push({
-      ...product,
-      quantity,
-      selectedShade,
-    });
-  }
+    if (existingProduct) {
+      existingProduct.quantity += quantity;
+    } else {
+      cart.push({
+        ...product,
+        quantity,
+        selectedShade,
+      });
+    }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("cartUpdated"));
 
-  setIsAdded(true);
+    setIsAdded(true);
 
-  setTimeout(() => {
-    setIsAdded(false);
-  }, 2000);
-};
+    setTimeout(() => {
+      setIsAdded(false);
+    }, 2000);
+  };
 
   return (
     <div className="pt-[100px] pb-24">
-      {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-6 py-8 flex items-center gap-2 text-[10px] uppercase tracking-widest font-medium text-brand-ink/40">
         <Link to="/" className="hover:text-brand-ink">Home</Link>
         <ChevronRight size={10} />
@@ -59,7 +59,6 @@ const handleAddToCart = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
-        {/* Image Gallery */}
         <div className="space-y-4">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -72,20 +71,21 @@ const handleAddToCart = () => {
               className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
               referrerPolicy="no-referrer"
             />
-            {/* Virtual Try On Placeholder */}
+
             <button className={cn("absolute bottom-6 left-6 px-4 py-2 rounded-full flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold", GLASS_EFFECT)}>
               <Play size={12} fill="currentColor" />
               Virtual Try On
             </button>
           </motion.div>
+
           <div className="grid grid-cols-4 gap-4">
-            {[product.image, product.hoverImage, ...Array(2)].map((img, i) => (
+            {[product.image, product.hoverImage, product.image, product.hoverImage].map((img, i) => (
               <div 
                 key={i} 
                 className="aspect-square rounded-xl overflow-hidden bg-brand-blush cursor-pointer hover:opacity-80 transition-opacity border-2 border-transparent hover:border-brand-rose"
               >
                 <img 
-                  src={img || "https://images.unsplash.com/photo-1596462502278-27bfdc4033c8?auto=format&fit=crop&q=80&w=300"} 
+                  src={img} 
                   alt="Product view"
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"
@@ -95,13 +95,13 @@ const handleAddToCart = () => {
           </div>
         </div>
 
-        {/* Product Info */}
         <div className="flex flex-col">
           <div className="space-y-6 pb-8 border-b border-brand-ink/5">
             <div className="flex items-center justify-between">
               <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-brand-rose">
                 {product.category}
               </span>
+
               <div className="flex items-center gap-2">
                 <button className="p-2 hover:bg-brand-blush rounded-full transition-colors">
                   <Share2 size={18} strokeWidth={1.5} />
@@ -120,23 +120,25 @@ const handleAddToCart = () => {
                   <Star key={i} size={14} fill={i < Math.floor(product.rating) ? "#D9B3A8" : "none"} className="text-brand-rose" />
                 ))}
               </div>
+
               <span className="text-sm font-medium">{product.rating}</span>
               <span className="text-brand-ink/40 text-sm">({product.reviews} Reviews)</span>
             </div>
 
             <p className="text-2xl font-serif">${product.price}</p>
+
             <p className="text-brand-ink/70 leading-relaxed max-w-lg">
               {product.description}
             </p>
           </div>
 
-          {/* Shade Selector */}
           {product.shades && (
             <div className="py-8 space-y-4 border-b border-brand-ink/5">
               <div className="flex justify-between items-center">
                 <h4 className="text-[10px] uppercase tracking-widest font-bold">Select Shade:</h4>
                 <p className="text-xs text-brand-rose italic underline cursor-pointer">Find your perfect match</p>
               </div>
+
               <div className="flex flex-wrap gap-3">
                 {product.shades.map((shade) => (
                   <button
@@ -154,18 +156,20 @@ const handleAddToCart = () => {
                   </button>
                 ))}
               </div>
+
               <p className="text-xs font-medium text-brand-ink/60">Selected: {selectedShade}</p>
             </div>
           )}
 
-          {/* Purchase Actions */}
           <div className="py-8 space-y-6">
             <div className="flex items-center gap-6">
               <div className="flex items-center border border-brand-ink/10 rounded-full px-4 py-2">
                 <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-1 hover:text-brand-rose transition-colors">
                   <Minus size={16} />
                 </button>
+
                 <span className="w-12 text-center font-medium">{quantity}</span>
+
                 <button onClick={() => setQuantity(quantity + 1)} className="p-1 hover:text-brand-rose transition-colors">
                   <Plus size={16} />
                 </button>
@@ -188,7 +192,7 @@ const handleAddToCart = () => {
                       exit={{ opacity: 0, y: -20 }}
                       className="flex items-center justify-center gap-2"
                     >
-                      <Check size={16} /> Added to Cart
+                      <Check size={16} /> Added to Bag
                     </motion.span>
                   ) : (
                     <motion.span 
@@ -204,7 +208,6 @@ const handleAddToCart = () => {
               </button>
             </div>
 
-            {/* Trust Badges & Delivery */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="flex items-start gap-3 p-4 bg-brand-cream border border-brand-ink/5 rounded-2xl">
                 <Truck size={18} className="text-brand-ink/40 mt-1" />
@@ -213,6 +216,7 @@ const handleAddToCart = () => {
                   <p className="text-[10px] text-brand-ink/60">On all orders over $50</p>
                 </div>
               </div>
+
               <div className="flex items-start gap-3 p-4 bg-brand-cream border border-brand-ink/5 rounded-2xl">
                 <ShieldCheck size={18} className="text-brand-ink/40 mt-1" />
                 <div>
@@ -223,7 +227,6 @@ const handleAddToCart = () => {
             </div>
           </div>
 
-          {/* Accordion Sections */}
           <div className="mt-auto space-y-2">
             {[
               { id: 'description', label: 'Details', icon: <Sparkles size={16} /> },
@@ -239,6 +242,7 @@ const handleAddToCart = () => {
                     <span className="text-brand-ink/40 group-hover:text-brand-rose transition-colors">{tab.icon}</span>
                     <span className="text-[10px] uppercase tracking-widest font-bold">{tab.label}</span>
                   </div>
+
                   <Plus 
                     size={16} 
                     className={cn(
@@ -247,6 +251,7 @@ const handleAddToCart = () => {
                     )} 
                   />
                 </button>
+
                 <AnimatePresence>
                   {activeTab === tab.id && (
                     <motion.div 
@@ -271,12 +276,14 @@ const handleAddToCart = () => {
         </div>
       </div>
 
-      {/* Suggested Products */}
       <section className="mt-32 max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-3xl font-serif italic">Complete the Look</h2>
-          <Link to="/shop" className="text-[10px] uppercase tracking-widest font-bold border-b border-brand-ink pb-1">Shop Collection</Link>
+          <Link to="/shop" className="text-[10px] uppercase tracking-widest font-bold border-b border-brand-ink pb-1">
+            Shop Collection
+          </Link>
         </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {PRODUCTS.filter(p => p.id !== product.id).map(p => (
             <div key={p.id}>

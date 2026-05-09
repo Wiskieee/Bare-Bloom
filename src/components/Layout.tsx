@@ -7,15 +7,30 @@ import { cn } from '@/src/lib/utils';
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const location = useLocation();
+
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const total = cart.reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
+    setCartCount(total);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+
+    updateCartCount();
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('cartUpdated', updateCartCount);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('cartUpdated', updateCartCount);
+    };
+  }, [location.pathname]);
 
   const navLinks = [
     { name: 'Shop All', path: '/shop' },
@@ -32,7 +47,6 @@ export const Header = () => {
       )}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Mobile Menu Toggle */}
         <button 
           className="lg:hidden text-brand-ink"
           onClick={() => setIsMobileMenuOpen(true)}
@@ -40,7 +54,6 @@ export const Header = () => {
           <Menu size={24} />
         </button>
 
-        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
@@ -53,7 +66,6 @@ export const Header = () => {
           ))}
         </nav>
 
-        {/* Logo */}
         <Link 
           to="/" 
           className="absolute left-1/2 -translate-x-1/2 text-2xl md:text-3xl font-serif tracking-tighter"
@@ -61,27 +73,31 @@ export const Header = () => {
           Bare <span className="italic font-light text-brand-rose">&</span> Bloom
         </Link>
 
-        {/* Action Icons */}
         <div className="flex items-center gap-4 md:gap-6">
           <button className="hidden md:block text-brand-ink/70 hover:text-brand-ink transition-colors">
             <Search size={20} strokeWidth={1.5} />
           </button>
+
           <button className="hidden md:block text-brand-ink/70 hover:text-brand-ink transition-colors">
             <Heart size={20} strokeWidth={1.5} />
           </button>
+
           <Link to="/account" className="text-brand-ink/70 hover:text-brand-ink transition-colors">
             <User size={20} strokeWidth={1.5} />
           </Link>
-          <button className="relative text-brand-ink/70 hover:text-brand-ink transition-colors">
+
+          <button
+            onClick={updateCartCount}
+            className="relative text-brand-ink/70 hover:text-brand-ink transition-colors"
+          >
             <ShoppingBag size={20} strokeWidth={1.5} />
             <span className="absolute -top-2 -right-2 bg-brand-rose text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center">
-              0
+              {cartCount}
             </span>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
@@ -95,6 +111,7 @@ export const Header = () => {
                 <X size={32} strokeWidth={1} />
               </button>
             </div>
+
             <nav className="mt-20 flex flex-col gap-8">
               {navLinks.map((link) => (
                 <Link 
@@ -107,6 +124,7 @@ export const Header = () => {
                 </Link>
               ))}
             </nav>
+
             <div className="mt-auto pt-12 border-t border-brand-ink/10 flex gap-6">
               <Instagram size={20} />
               <Twitter size={20} />
